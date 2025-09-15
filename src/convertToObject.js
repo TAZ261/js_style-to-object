@@ -9,13 +9,15 @@ function convertToObject(sourceString) {
   // write your code here
   return sourceString
     .split(';')
-    .map((s) => s.trim())
+    .map((declaration) => declaration.trim())
     .filter(Boolean)
-    .map((s) => s.split(':').map((item) => item.trim()))
-    .reduce((obj, [key, value]) => {
-      obj[key] = value;
+    .map((declaration) => declaration.split(':').map((item) => item.trim()))
+    .reduce((styleObject, [key, value]) => {
+      if (key && key.length) {
+        styleObject[key] = value;
+      }
 
-      return obj;
+      return styleObject;
     }, {});
 }
 
